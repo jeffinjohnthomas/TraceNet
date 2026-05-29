@@ -36,7 +36,7 @@ export default function AdminHeader({ setIsMobileMenuOpen, user, auditLogs, case
   }, [cases]);
 
   useEffect(() => {
-    const socket = io('http://localhost:5000');
+    const socket = io((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'));
     
     // Listen to ALL global events since this is the Admin Command Center
     socket.on('new_case', (newCase) => {

@@ -17,7 +17,7 @@ export default function InvestigatorHeader({
   useEffect(() => {
     if (user && user._id) {
       fetchNotifications();
-      const socket = io('http://localhost:5000');
+      const socket = io((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'));
       socket.on('new_notification', (notif) => {
         if (notif.userId === user._id) {
           setNotifications(prev => [notif, ...prev]);

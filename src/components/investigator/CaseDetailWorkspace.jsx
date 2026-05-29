@@ -126,7 +126,7 @@ export default function CaseDetailWorkspace({
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {activeTimeline.filter(t => t.type !== 'doc').length > 0 ? activeTimeline.filter(t => t.type !== 'doc').map((file, idx) => {
                   const isImage = file.fileType?.startsWith('image/') || file.fileUrl?.match(/\.(jpeg|jpg|gif|png)$/) != null;
-                  const fullUrl = file.fileUrl?.startsWith('http') ? file.fileUrl : `http://localhost:5000${file.fileUrl}`;
+                  const fullUrl = file.fileUrl?.startsWith('http') ? file.fileUrl : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}${file.fileUrl}`;
                   return (
                   <motion.div 
                     initial={{ opacity: 0, scale: 0.95 }}

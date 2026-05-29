@@ -45,7 +45,7 @@ export default function PublicDashboard({ onLogout }) {
     }
 
     // Socket.io Real-time Notifications
-    const socket = io('http://localhost:5000');
+    const socket = io((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'));
     
     socket.on('new_case', (newCase) => {
       // Only show popup if this public user reported it

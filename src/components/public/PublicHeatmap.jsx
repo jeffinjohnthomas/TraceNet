@@ -34,7 +34,7 @@ export default function PublicHeatmap() {
     fetchHeatmapData();
 
     // Listen for live updates so pins drop in real-time without refresh!
-    const socket = io('http://localhost:5000');
+    const socket = io((import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'));
     socket.on('new_case', (newCase) => {
       if (newCase.latitude && newCase.longitude) {
         setHeatmapData(prev => [newCase, ...prev]);
