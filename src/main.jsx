@@ -5,7 +5,7 @@ import App from './App.jsx'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
 // Verified OAuth Gateway Client ID explicitly bound natively
-const GOOGLE_CLIENT_ID = '412104144621-af2g32q0q5nj7elna2d5v57jlctn5kov.apps.googleusercontent.com'
+const GOOGLE_CLIENT_ID = '244320311360-h7qvdkdv5vn2vso6mg73e9i2bp7fb0j0.apps.googleusercontent.com'
 
 class ErrorBoundary extends React.Component {
   constructor(props) { super(props); this.state = { hasError: false, error: null, info: null }; }
