@@ -966,7 +966,21 @@ app.post('/api/admin/investigators', protect, async (req, res) => {
     
     // Check if exists
     let userExists = await User.findOne({ email });
-    if (userExists) return res.status(400).json({ message: 'Email already mapped to an existing officer.' });
+    if (userExists) {
+      if (userExists.role === 'investigator') {
+        return res.status(400).json({ message: 'Email already mapped to an existing officer.' });
+      } else {
+        // Upgrade existing user to investigator
+        userExists.role = 'investigator';
+        userExists.name = name;
+        if (password && !userExists.googleId) {
+          userExists.password = password;
+        }
+        await userExists.save();
+        await AuditLog.create({ action: `Admin upgraded existing user to Officer: ${name}`, performedBy: req.user.name });
+        return res.status(200).json(userExists);
+      }
+    }
 
     const inv = await User.create({ name, email, password, role: 'investigator', activeCases: 0 });
     await AuditLog.create({ action: `Admin manually provisioned Officer: ${name}`, performedBy: req.user.name });
